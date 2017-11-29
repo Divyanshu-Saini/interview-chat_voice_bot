@@ -150,7 +150,7 @@ app.post('/interview-webhook', (req, res) => {
             }
             let avg = total/score.length;
             console.log('Average Score is ',avg);
-            if(avg>50){
+            if(avg>65){
                 msg = 'You scored ' + avg + 'you have sucessfully cleared the interview';
             }else{
                 msg = 'You havent cleared the interview as your score is '+avg;
