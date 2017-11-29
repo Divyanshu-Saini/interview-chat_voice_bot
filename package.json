@@ -2,7 +2,7 @@
   "name": "interview-chat_voice_boy",
   "version": "1.0.0",
   "description": "A chatbot which takes interview of candidate  ",
-  "main": "mian.js",
+  "main": "main.js",
   "scripts": {
     "test": "npm start"
   },
