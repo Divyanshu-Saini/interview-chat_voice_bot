@@ -1,0 +1,26 @@
+{
+  "name": "interview-chat_voice_boy",
+  "version": "1.0.0",
+  "description": "A chatbot which takes interview of candidate  ",
+  "main": "mian.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Divyanshu-Saini/interview-chat_voice_boy.git"
+  },
+  "keywords": [
+    "dialogflow",
+    "api.ai",
+    "chatbot",
+    "nlp",
+    "nodejs"
+  ],
+  "author": "Divyanshu Saini",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Divyanshu-Saini/interview-chat_voice_boy/issues"
+  },
+  "homepage": "https://github.com/Divyanshu-Saini/interview-chat_voice_boy#readme"
+}
