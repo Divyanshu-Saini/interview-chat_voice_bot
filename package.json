@@ -4,7 +4,7 @@
   "description": "A chatbot which takes interview of candidate  ",
   "main": "main.js",
   "scripts": {
-    "test": "npm start"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/Divyanshu-Saini/interview-chat_voice_boy/issues"
   },
-  "homepage": "https://github.com/Divyanshu-Saini/interview-chat_voice_boy#readme"
+  "homepage": "https://github.com/Divyanshu-Saini/interview-chat_voice_boy#readme",
+  "dependencies": {
+    "apiai": "^4.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "request": "^2.83.0",
+    "similarity": "^1.1.1",
+    "string-similarity": "^1.2.0"
+  }
 }
