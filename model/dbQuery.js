@@ -1,6 +1,6 @@
-db.aptiQA.find({})
+db.aptiqas.find({})
 
-db.aptiQA.insertMany([{
+db.aptiqas.insertMany([{
     qid: 'QA1',
     question: 'MEAN stands for?',
     ans1: 'MongoDB,Express',
