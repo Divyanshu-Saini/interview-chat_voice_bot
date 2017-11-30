@@ -26,9 +26,10 @@
   "dependencies": {
     "apiai": "^4.0.3",
     "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "mongoose": "^4.13.5",
     "request": "^2.83.0",
-    "similarity": "^1.1.1",
-    "string-similarity": "^1.2.0"
+    "similarity": "^1.1.1"
   }
 }
