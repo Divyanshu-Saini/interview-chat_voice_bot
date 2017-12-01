@@ -14,17 +14,17 @@ const router = express.Router();
 const client = requestJson.createClient('http://0446c2aa.ngrok.io/interviewDBRoutes/');
 var json;
 const quest = [],
-answer = [];
+    answer = [];
 //load question and answer
 request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
     if (!err && response.statusCode == 200) {
-    json  = JSON.parse(body);
-    console.log(json);
-    for (let qa of json) {
-        quest.push(qa.question);
-        answer.push(qa.ans);
-    }
-      
+        json = JSON.parse(body);
+        console.log(json);
+        for (let qa of json) {
+            quest.push(qa.question);
+            answer.push(qa.ans);
+        }
+
         console.log("Question :", quest);
         console.log("Answer :", answer);
     } else {
@@ -167,7 +167,7 @@ router.post('/interview-webhook', (req, res) => {
                 msg = 'You scored ' + parseInt(sc) + 'congratulations ' + name + ' you have sucessfully cleared our interview';
                 interview_cleared = true;
             } else {
-                msg = 'You havent cleared the interview try later ' ;
+                msg = 'You havent cleared the interview try later ';
                 interview_cleared = false;
             }
             user = {
