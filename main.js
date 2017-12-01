@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const apiai = require('apiai');
 const webhook = require('./route/webhook');
-const aptiQARoutes =require('./route/aptiQARoutes')
+const interviewDBRoutes =require('./route/interviewDBRoutes')
 const mongoose = require('mongoose');
 
 //initializing app
@@ -34,7 +34,7 @@ app.use(express.static(__dirname + '/public'));
 
 //setting routes
 app.use('/',webhook);
-app.use('/aptiQA',aptiQARoutes);
+app.use('/interviewDBRoutes',interviewDBRoutes);
 
 //setting mongodb connection
 mongoose.connect(`mongodb://${process.env.DB_HOST_DEV}:${process.env.DB_PORT}/${process.env.DB}`, { useMongoClient: true });

@@ -30,6 +30,8 @@
     "express": "^4.16.2",
     "mongoose": "^4.13.5",
     "request": "^2.83.0",
-    "similarity": "^1.1.1"
+    "request-json": "^0.6.2",
+    "similarity": "^1.1.1",
+    "uuid": "^3.1.0"
   }
 }

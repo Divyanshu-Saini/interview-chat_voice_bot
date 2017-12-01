@@ -29,3 +29,5 @@ db.aptiqas.insertMany([{
     ans3: 'web applications',
     c_ans: 'All of the above'
 }])
+
+db.interviewedusers.find({})
