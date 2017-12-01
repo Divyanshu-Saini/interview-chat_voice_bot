@@ -3,7 +3,6 @@ const express = require('express');
 const aptiQA = require('../model/aptiQA');
 const similarity = require('similarity');
 const uuid = require('uuid');
-const request = require('request');
 const requestJson = require('request-json');
 
 //initialise router
