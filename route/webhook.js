@@ -1,6 +1,6 @@
 //import packages
 const express = require('express');
-const aptiQA =require('../model/aptiQA');
+const aptiQA = require('../model/aptiQA');
 const similarity = require('similarity');
 
 //initialise router
@@ -8,27 +8,29 @@ const router = express.Router();
 
 //questions
 const quest1 = 'What does MVC Stand for?',
-quest2 = 'What does Model represent in MVC?',
-quest3 = 'What does View represent in MVC?',
-quest4 = 'What is Controller in MVC?';
+    quest2 = 'What does Model represent in MVC?',
+    quest3 = 'What does View represent in MVC?',
+    quest4 = 'What is Controller in MVC?';
 
 //answers
 const ans1 = 'MVC stands for Model, View, Controller',
-ans2 = 'The model represents the data',
-ans3 = 'View represents user interface',
-ans4 = 'The controller is the decision maker';
+    ans2 = 'The model represents the data',
+    ans3 = 'View represents user interface',
+    ans4 = 'The controller is the decision maker';
 //scores
 const score = [];
-//msg
+//variables
 var msg = '';
+var name = '';
+var qualification = '';
 //Webhook for interview
 router.post('/interview-webhook', (req, res) => {
     console.log("Apiai request :", req.body);
-
     // let question = req.nody.result.fulfillment.speech;
-
     //quest 1
     if (req.body.result.action === 'question1') {
+        name = req.body.result.parameters['given-name'];
+        qualification = req.body.result.parameters['qualifiation'];
         if (req.body.result.action === 'question1') {
             console.log('welcome intent yes :', req.body.result.resolvedQuery)
             return res.json({
@@ -113,7 +115,7 @@ router.post('/interview-webhook', (req, res) => {
             })
         }
     }
-    //quest4
+    //result
     if (req.body.result.action === 'result') {
         if (req.body.result.action === 'result') {
             console.log('Quest4 :', req.body.result.resolvedQuery)
