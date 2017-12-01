@@ -2,6 +2,7 @@
 const express = require('express');
 const aptiQA = require('../model/aptiQA');
 const interviewedUser = require('../model/interviewedUser');
+const interQA = require('../model/interQA');
 
 // initialising
 const router = express.Router();
@@ -57,5 +58,32 @@ router.post('/getUser', (req, res, next) => {
             res.status(200).json(result);
     })
 });
+
+//routes for interview question
+router.get('/getInterQa', (req, res, next) => {
+    interQA.find((error, result) => {
+        if (error)
+            res.status(404).json({
+                Messsage: 'Some Error Occured',
+                ErrorDetail: Error
+            });
+        else
+            res.status(200).json(result);
+    });
+});
+
+router.post('/getInterQa', (req, res, next) => {
+    var data = new interQA(req.body);
+    data.save((error, result) => {
+        if (error)
+            res.status(404).json({
+                Messsage: 'Some Error Occured',
+                ErrorDetail: Error
+            });
+        else
+            res.status(200).json(result);
+    })
+});
+
 //exporting router
 module.exports = router;
