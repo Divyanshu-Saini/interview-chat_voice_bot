@@ -130,7 +130,7 @@ router.post('/interview-webhook', (req, res) => {
             let avg = total / score.length;
             console.log('Average Score is ', avg);
             if (avg > 65) {
-                msg = 'You scored ' + avg + 'you have sucessfully cleared the interview';
+                msg = 'You scored ' + avg + 'congratulations '+name+' you have sucessfully cleared our interview';
             } else {
                 msg = 'You havent cleared the interview as your score is ' + avg;
             }
