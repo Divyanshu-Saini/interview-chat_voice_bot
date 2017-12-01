@@ -61,7 +61,16 @@ router.post('/getUser', (req, res, next) => {
 
 //routes for interview question
 router.get('/getInterQa', (req, res, next) => {
-    interQA.find((error, result) => {
+    // interQA.find((error, result) => {
+    //     if (error)
+    //         res.status(404).json({
+    //             Messsage: 'Some Error Occured',
+    //             ErrorDetail: Error
+    //         });
+    //     else
+    //         res.status(200).json(result);
+    // });
+    interQA.aggregate({ $sample: { size: 4 } }, (error, result) => {
         if (error)
             res.status(404).json({
                 Messsage: 'Some Error Occured',
@@ -69,7 +78,7 @@ router.get('/getInterQa', (req, res, next) => {
             });
         else
             res.status(200).json(result);
-    });
+    })
 });
 
 router.post('/getInterQa', (req, res, next) => {

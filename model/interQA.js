@@ -6,10 +6,7 @@ var Scheme = mongoose.Schema;
 var interQASchema = new Scheme({
     qid:String,
     question:String,
-    ans1:String,
-    ans2:String,
-    ans3:String,
-    c_ans:String
+    ans:String
 });
 
 //exporting model

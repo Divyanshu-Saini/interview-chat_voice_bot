@@ -2,7 +2,6 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const bodyParser = require('body-parser');
-const request = require('request');
 const apiai = require('apiai');
 const webhook = require('./route/webhook');
 const interviewDBRoutes =require('./route/interviewDBRoutes')

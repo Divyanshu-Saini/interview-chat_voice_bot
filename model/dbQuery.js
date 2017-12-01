@@ -31,3 +31,27 @@ db.aptiqas.insertMany([{
 }])
 
 db.interviewedusers.find({})
+
+db.interqas.find({})
+
+db.interqas.insertMany([{
+    qid: 'QA1',
+    question: 'What does MVC Stand for?',
+    ans: 'MVC stands for Model, View, Controller'
+}, {
+    qid: 'QA2',
+    question: 'What does Model represent in MVC?',
+    ans: 'The model represents the data'
+}, {
+    qid: 'QA3',
+    question: 'What does View represent in MVC?',
+    ans: 'View represents user interface'
+}, {
+    qid: 'QA4',
+    question: 'What is Controller in MVC?',
+    ans: 'The controller is the decision maker'
+}])
+
+db.interqas.aggregate(
+    { $sample: { size: 4 } }
+)
