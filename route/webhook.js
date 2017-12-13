@@ -11,7 +11,7 @@ const request = require('request');
 //initialise router
 dotenv.load();
 const router = express.Router();
-const client = requestJson.createClient('http://0446c2aa.ngrok.io/interviewDBRoutes/');
+const client = requestJson.createClient(process.env.REQ_URL_Question);
 var json;
 const quest = [],
     answer = [];
