@@ -53,7 +53,5 @@ db.interqas.insertMany([{
 }])
 
 db.interqas.aggregate(
-    { $sample: { size: 4 } }
+    { $sample: { size: 4 } })
 
-
-    console.log(hello"");
