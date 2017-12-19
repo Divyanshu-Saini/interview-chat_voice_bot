@@ -67,6 +67,15 @@ router.post('/interview-webhook', (req, res) => {
             }
         })
     }
+    //exit event
+    if (req.body.result.action === 'exit') {
+        res.json({
+            "followupEvent": {
+                "name": "EXITEVENT"
+            }
+
+        })
+    }
     //quest 1
     if (req.body.result.action === 'question1') {
         name = req.body.result.parameters['given-name'];
@@ -194,6 +203,7 @@ router.post('/interview-webhook', (req, res) => {
             });
             score.slice(0, score.length);
             console.log(msg)
+            }
             return res.json({
                 speech: msg,
                 displayText: msg,
