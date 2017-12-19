@@ -10,11 +10,7 @@ const request = require('request');
 //initialise router
 dotenv.load();
 const router = express.Router();
-<<<<<<< HEAD
 const client = requestJson.createClient(process.env.REQ_URL_Question);
-=======
-const git  = requestJson.createClient('http://0446c2aa.ngrok.io/interviewDBRoutes/');
->>>>>>> 035b0eef56e1b59c7bfa2f5790825a931acdb057
 var json;
 const quest = [],
     answer = [];
