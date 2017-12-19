@@ -59,6 +59,14 @@ var user = undefined;
 router.post('/interview-webhook', (req, res) => {
     console.log("Apiai request :", req.body);
     // let question = req.nody.result.fulfillment.speech;
+    //restart event
+    if (req.body.result.action === 'restart') {
+        res.json({
+            "followupEvent": {
+                "name": "WELCOMEEVENT"
+            }
+        })
+    }
     //quest 1
     if (req.body.result.action === 'question1') {
         name = req.body.result.parameters['given-name'];
@@ -85,7 +93,7 @@ router.post('/interview-webhook', (req, res) => {
             console.log('Quest1 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
             let sc = 100 * similarity(ans1, resolvedQuery);
-            console.log("1:" , sc)
+            console.log("1:", sc)
             score.push(parseInt(sc));
             console.log(score);
             msg = ' Your next question is :' + quest2
@@ -109,7 +117,7 @@ router.post('/interview-webhook', (req, res) => {
             console.log('Quest2 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
             let sc = 100 * similarity(ans2, resolvedQuery);
-            console.log("2:" , sc)
+            console.log("2:", sc)
             score.push(parseInt(sc));
             console.log(score);
             msg = ' Your next question is :' + quest3
@@ -133,7 +141,7 @@ router.post('/interview-webhook', (req, res) => {
             console.log('Quest3 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
             let sc = 100 * similarity(ans3, resolvedQuery);
-            console.log("3:" , sc)
+            console.log("3:", sc)
             score.push(parseInt(sc));
             console.log(score);
             msg = ' Your next question is :' + quest4
@@ -157,7 +165,7 @@ router.post('/interview-webhook', (req, res) => {
             console.log('Quest4 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
             let sc = 100 * similarity(ans4, resolvedQuery);
-            console.log("4:" , sc)
+            console.log("4:", sc)
             score.push(parseInt(sc));
             console.log(score);
             let total = 0;
@@ -184,7 +192,7 @@ router.post('/interview-webhook', (req, res) => {
             client.post('getUser/', user, function (err, res, body) {
                 return console.log(res.statusCode);
             });
-            score.slice(0,score.length);
+            score.slice(0, score.length);
             console.log(msg)
             return res.json({
                 speech: msg,
