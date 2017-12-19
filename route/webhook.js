@@ -216,7 +216,6 @@ router.post('/interview-webhook', (req, res) => {
                 // source: 'weather'
             })
         }
-    }
 })
 
 //exporting router
