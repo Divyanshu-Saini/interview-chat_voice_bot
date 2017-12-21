@@ -46,7 +46,7 @@ request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
 //     ans3 = 'View represents user interface',
 //     ans4 = 'The controller is the decision maker';
 //scores
-const score = [];
+var score = [];
 //variables
 var msg = '';
 var uid = '';
@@ -58,7 +58,7 @@ var user = undefined;
 var count = 0;
 //Webhook for interview
 router.post('/interview-webhook', (req, res) => {
-    console.log("Apiai request :", req.body);
+    // console.log("Apiai request :", req.body);
     // let question = req.nody.result.fulfillment.speech;
     //restart event
     if (req.body.result.action === 'restart') {
@@ -81,7 +81,9 @@ router.post('/interview-webhook', (req, res) => {
     if (req.body.result.action === 'input.unknown') {
         if (req.body.result.action === 'input.unknown') {
             count++;
+            console.log("COunt is",count)
             let rnd = Math.floor(Math.random() * 6);
+            console.log(rnd);
             console.log('Quest1 :', req.body.result.resolvedQuery)
             // let resolvedQuery = req.body.result.resolvedQuery;
             // let sc = 100 * similarity(answer[rnd], resolvedQuery);
@@ -113,7 +115,9 @@ router.post('/interview-webhook', (req, res) => {
                 client.post('getUser/', user, function (err, res, body) {
                     return console.log(res.statusCode);
                 });
-                score.slice(0, score.length);
+                score=[];
+                // score.slice(0, score.length);
+                count = 0;
                 console.log(msg)
             }
             else {
@@ -157,6 +161,7 @@ router.post('/interview-webhook', (req, res) => {
     if (req.body.result.action === 'question2') {
         if (req.body.result.action === 'question2') {
             count++;
+            console.log("COunt is", count)
             console.log('Quest1 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
             let sc = 100 * similarity(answer[0], resolvedQuery);
@@ -187,7 +192,8 @@ router.post('/interview-webhook', (req, res) => {
                 client.post('getUser/', user, function (err, res, body) {
                     return console.log(res.statusCode);
                 });
-                score.slice(0, score.length);
+              score=[];
+              count = 0;
                 console.log(msg)
             }
             else {
@@ -213,6 +219,7 @@ router.post('/interview-webhook', (req, res) => {
     if (req.body.result.action === 'question3') {
         if (req.body.result.action === 'question3') {
             count++;
+            console.log("COunt is", count)
             console.log('Quest2 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
             let sc = 100 * similarity(answer[1], resolvedQuery);
@@ -244,7 +251,9 @@ router.post('/interview-webhook', (req, res) => {
                 client.post('getUser/', user, function (err, res, body) {
                     return console.log(res.statusCode);
                 });
-                score.slice(0, score.length);
+                // score.slice(0, score.length);
+                score = [];
+                count = 0;
                 console.log(msg)
             }
             else {
@@ -268,6 +277,7 @@ router.post('/interview-webhook', (req, res) => {
     if (req.body.result.action === 'question4') {
         if (req.body.result.action === 'question4') {
             count++;
+            console.log("COunt is", count)
             console.log('Quest3 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
             let sc = 100 * similarity(answer[2], resolvedQuery);
@@ -299,7 +309,9 @@ router.post('/interview-webhook', (req, res) => {
                 client.post('getUser/', user, function (err, res, body) {
                     return console.log(res.statusCode);
                 });
-                score.slice(0, score.length);
+                // score.slice(0, score.length);
+                score = [];
+                count=0;
                 console.log(msg)
             }
             else {
@@ -323,6 +335,7 @@ router.post('/interview-webhook', (req, res) => {
     if (req.body.result.action === 'question5') {
         if (req.body.result.action === 'question5') {
             count++;
+            console.log("COunt is", count)
             console.log('Quest3 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
             let sc = 100 * similarity(answer[3], resolvedQuery);
@@ -353,8 +366,10 @@ router.post('/interview-webhook', (req, res) => {
                 client.post('getUser/', user, function (err, res, body) {
                     return console.log(res.statusCode);
                 });
-                score.slice(0, score.length);
-                console.log(msg)
+                // score.slice(0, score.length);
+                score = [];
+                count=0;
+                console.log(msg);
             }
             else {
                 msg = ' Your next question is :' + quest[4]
