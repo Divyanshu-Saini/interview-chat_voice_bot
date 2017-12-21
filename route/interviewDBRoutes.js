@@ -70,7 +70,7 @@ router.get('/getInterQa', (req, res, next) => {
     //     else
     //         res.status(200).json(result);
     // });
-    interQA.aggregate({ $sample: { size: 10 } }, (error, result) => {
+    interQA.aggregate({ $sample: { size: 5 } }, (error, result) => {
         if (error)
             res.status(404).json({
                 Messsage: 'Some Error Occured',
