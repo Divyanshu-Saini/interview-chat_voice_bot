@@ -54,4 +54,29 @@ db.interqas.insertMany([{
 
 db.interqas.aggregate(
     { $sample: { size: 4 } })
-
+    
+db.interqas.insertMany([{
+    qid: 'QA5',
+    question: 'What is MongoDB?',
+    ans: ' Mongo DB is a NoSQl, document oriented database'
+}, {
+    qid: 'QA6',
+    question: 'What are the core operations of mongodb?',
+    ans: 'The core operation are Create, reade , update and delete'
+}, {
+    qid: 'QA7',
+    question: 'What type of web application can built using Express JS?',
+    ans: 'Expressjs can build single page as well as multipage web applications'
+}, {
+    qid: 'QA8',
+    question: 'Where Not to Use Node.js?',
+    ans: 'Node.js should not be used for CPU intensive applications.'
+},{
+    qid: 'QA9',
+    question: 'What does MEAN stand for?',
+    ans: 'MEAN stand for MongoDB, Express, Angular, Node'
+},{
+    qid: 'QA10',
+    question: 'Where Not to Use Node.js??',
+    ans: 'Node.js should not be used for CPU intensive applications.'
+}])

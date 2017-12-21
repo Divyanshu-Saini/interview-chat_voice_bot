@@ -34,16 +34,16 @@ request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
 
 
 
-//questions
-const quest1 = 'What does MVC Stand for?',
-    quest2 = 'What does Model represent in MVC?',
-    quest3 = 'What does View represent in MVC?',
-    quest4 = 'What is Controller in MVC?';
-//answers
-const ans1 = 'MVC stands for Model, View, Controller',
-    ans2 = 'The model represents the data',
-    ans3 = 'View represents user interface',
-    ans4 = 'The controller is the decision maker';
+// //questions
+// const quest1 = 'What does MVC Stand for?',
+//     quest2 = 'What does Model represent in MVC?',
+//     quest3 = 'What does View represent in MVC?',
+//     quest4 = 'What is Controller in MVC?';
+// //answers
+// const ans1 = 'MVC stands for Model, View, Controller',
+//     ans2 = 'The model represents the data',
+//     ans3 = 'View represents user interface',
+//     ans4 = 'The controller is the decision maker';
 //scores
 const score = [];
 //variables
@@ -167,12 +167,156 @@ router.post('/interview-webhook', (req, res) => {
             })
         }
     }
+    //quest5
+    if (req.body.result.action === 'question5') {
+        if (req.body.result.action === 'question5') {
+            console.log('Quest3 :', req.body.result.resolvedQuery)
+            let resolvedQuery = req.body.result.resolvedQuery;
+            let sc = 100 * similarity(answer[3], resolvedQuery);
+            console.log("3:", sc)
+            score.push(parseInt(sc));
+            console.log(score);
+            msg = ' Your next question is :' + quest[4]
+            console.log(msg)
+            return res.json({
+                speech: msg,
+                displayText: msg,
+                // source: ''
+            });
+        } else {
+            return res.json({
+                speech: 'Some error occured',
+                displayText: 'Some error occured',
+                // source: 'weather'
+            })
+        }
+    }
+    //quest6
+    if (req.body.result.action === 'question6') {
+        if (req.body.result.action === 'question6') {
+            console.log('Quest3 :', req.body.result.resolvedQuery)
+            let resolvedQuery = req.body.result.resolvedQuery;
+            let sc = 100 * similarity(answer[4], resolvedQuery);
+            console.log("3:", sc)
+            score.push(parseInt(sc));
+            console.log(score);
+            msg = ' Your next question is :' + quest[5]
+            console.log(msg)
+            return res.json({
+                speech: msg,
+                displayText: msg,
+                // source: ''
+            });
+        } else {
+            return res.json({
+                speech: 'Some error occured',
+                displayText: 'Some error occured',
+                // source: 'weather'
+            })
+        }
+    }
+    //quest7
+    if (req.body.result.action === 'question7') {
+        if (req.body.result.action === 'question7') {
+            console.log('Quest3 :', req.body.result.resolvedQuery)
+            let resolvedQuery = req.body.result.resolvedQuery;
+            let sc = 100 * similarity(answer[5], resolvedQuery);
+            console.log("3:", sc)
+            score.push(parseInt(sc));
+            console.log(score);
+            msg = ' Your next question is :' + quest[6]
+            console.log(msg)
+            return res.json({
+                speech: msg,
+                displayText: msg,
+                // source: ''
+            });
+        } else {
+            return res.json({
+                speech: 'Some error occured',
+                displayText: 'Some error occured',
+                // source: 'weather'
+            })
+        }
+    }
+    //quest8
+    if (req.body.result.action === 'question8') {
+        if (req.body.result.action === 'question8') {
+            console.log('Quest3 :', req.body.result.resolvedQuery)
+            let resolvedQuery = req.body.result.resolvedQuery;
+            let sc = 100 * similarity(answer[6], resolvedQuery);
+            console.log("3:", sc)
+            score.push(parseInt(sc));
+            console.log(score);
+            msg = ' Your next question is :' + quest[7]
+            console.log(msg)
+            return res.json({
+                speech: msg,
+                displayText: msg,
+                // source: ''
+            });
+        } else {
+            return res.json({
+                speech: 'Some error occured',
+                displayText: 'Some error occured',
+                // source: 'weather'
+            })
+        }
+    }
+    //quest9
+    if (req.body.result.action === 'question9') {
+        if (req.body.result.action === 'question9') {
+            console.log('Quest3 :', req.body.result.resolvedQuery)
+            let resolvedQuery = req.body.result.resolvedQuery;
+            let sc = 100 * similarity(answer[7], resolvedQuery);
+            console.log("3:", sc)
+            score.push(parseInt(sc));
+            console.log(score);
+            msg = ' Your next question is :' + quest[8]
+            console.log(msg)
+            return res.json({
+                speech: msg,
+                displayText: msg,
+                // source: ''
+            });
+        } else {
+            return res.json({
+                speech: 'Some error occured',
+                displayText: 'Some error occured',
+                // source: 'weather'
+            })
+        }
+    }
+        //quest9
+        if (req.body.result.action === 'question10') {
+            if (req.body.result.action === 'question10') {
+                console.log('Quest3 :', req.body.result.resolvedQuery)
+                let resolvedQuery = req.body.result.resolvedQuery;
+                let sc = 100 * similarity(answer[8], resolvedQuery);
+                console.log("3:", sc)
+                score.push(parseInt(sc));
+                console.log(score);
+                msg = ' Your next question is :' + quest[9]
+                console.log(msg)
+                return res.json({
+                    speech: msg,
+                    displayText: msg,
+                    // source: ''
+                });
+            } else {
+                return res.json({
+                    speech: 'Some error occured',
+                    displayText: 'Some error occured',
+                    // source: 'weather'
+                })
+            }
+        }
     //result
     if (req.body.result.action === 'result') {
         if (req.body.result.action === 'result') {
             console.log('Quest4 :', req.body.result.resolvedQuery)
             let resolvedQuery = req.body.result.resolvedQuery;
-            let sc = 100 * similarity(answer[3], resolvedQuery);
+            let sc = 100 * similarity(answer[9], resolvedQuery);
             console.log("4:", sc)
             score.push(parseInt(sc));
             console.log(score);
