@@ -7,6 +7,7 @@ var interviewedUserSchema = new Scheme({
     uid:String,
     name:String,
     qualification:String,    
+    email:String,
     score:Number,
     interview_cleared:Boolean
 });

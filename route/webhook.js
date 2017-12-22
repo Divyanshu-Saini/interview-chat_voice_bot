@@ -31,10 +31,6 @@ request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
         console.log('Error occured :', err);
     }
 });
-
-
-
-
 // //questions
 // const quest1 = 'What does MVC Stand for?',
 //     quest2 = 'What does Model represent in MVC?',
@@ -45,6 +41,7 @@ request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
 //     ans2 = 'The model represents the data',
 //     ans3 = 'View represents user interface',
 //     ans4 = 'The controller is the decision maker';
+
 //scores
 var score = [];
 //variables
@@ -56,10 +53,9 @@ var u_score = undefined;
 var interview_cleared = undefined;
 var user = undefined;
 var count = 0;
+
 //Webhook for interview
 router.post('/interview-webhook', (req, res) => {
-    // console.log("Apiai request :", req.body);
-    // let question = req.nody.result.fulfillment.speech;
     //restart event
     if (req.body.result.action === 'restart') {
         res.json({
@@ -68,6 +64,7 @@ router.post('/interview-webhook', (req, res) => {
             }
         })
     }
+
     //exit event
     if (req.body.result.action === 'exit') {
         res.json({
@@ -77,11 +74,12 @@ router.post('/interview-webhook', (req, res) => {
 
         })
     }
+
     // default fallback event
     if (req.body.result.action === 'input.unknown') {
         if (req.body.result.action === 'input.unknown') {
             count++;
-            console.log("COunt is",count)
+            console.log("COunt is", count)
             let rnd = Math.floor(Math.random() * 6);
             console.log(rnd);
             console.log('Quest1 :', req.body.result.resolvedQuery)
@@ -115,7 +113,7 @@ router.post('/interview-webhook', (req, res) => {
                 client.post('getUser/', user, function (err, res, body) {
                     return console.log(res.statusCode);
                 });
-                score=[];
+                score = [];
                 // score.slice(0, score.length);
                 count = 0;
                 console.log(msg)
@@ -137,6 +135,7 @@ router.post('/interview-webhook', (req, res) => {
             })
         }
     }
+
     //quest 1
     if (req.body.result.action === 'question1') {
         name = req.body.result.parameters['given-name'];
@@ -157,6 +156,7 @@ router.post('/interview-webhook', (req, res) => {
             });
         }
     }
+
     //quest2
     if (req.body.result.action === 'question2') {
         if (req.body.result.action === 'question2') {
@@ -192,8 +192,8 @@ router.post('/interview-webhook', (req, res) => {
                 client.post('getUser/', user, function (err, res, body) {
                     return console.log(res.statusCode);
                 });
-              score=[];
-              count = 0;
+                score = [];
+                count = 0;
                 console.log(msg)
             }
             else {
@@ -273,6 +273,7 @@ router.post('/interview-webhook', (req, res) => {
             })
         }
     }
+
     //quest4
     if (req.body.result.action === 'question4') {
         if (req.body.result.action === 'question4') {
@@ -311,7 +312,7 @@ router.post('/interview-webhook', (req, res) => {
                 });
                 // score.slice(0, score.length);
                 score = [];
-                count=0;
+                count = 0;
                 console.log(msg)
             }
             else {
@@ -331,6 +332,7 @@ router.post('/interview-webhook', (req, res) => {
             })
         }
     }
+
     //quest5
     if (req.body.result.action === 'question5') {
         if (req.body.result.action === 'question5') {
@@ -368,7 +370,7 @@ router.post('/interview-webhook', (req, res) => {
                 });
                 // score.slice(0, score.length);
                 score = [];
-                count=0;
+                count = 0;
             }
             else {
                 msg = ' Your next question is :' + quest[4]
@@ -387,6 +389,7 @@ router.post('/interview-webhook', (req, res) => {
             })
         }
     }
+
     // //quest6
     // if (req.body.result.action === 'question6') {
     //     if (req.body.result.action === 'question6') {
@@ -461,27 +464,27 @@ router.post('/interview-webhook', (req, res) => {
     // }
     // //quest9
     // if (req.body.result.action === 'question9') {
-    //     if (req.body.result.action === 'question9') {
-    //         console.log('Quest3 :', req.body.result.resolvedQuery)
-    //         let resolvedQuery = req.body.result.resolvedQuery;
-    //         let sc = 100 * similarity(answer[7], resolvedQuery);
-    //         console.log("3:", sc)
-    //         score.push(parseInt(sc));
-    //         console.log(score);
-    //         msg = ' Your next question is :' + quest[8]
-    //         console.log(msg)
-    //         return res.json({
-    //             speech: msg,
-    //             displayText: msg,
-    //             // source: ''
-    //         });
-    //     } else {
-    //         return res.json({
-    //             speech: 'Some error occured',
-    //             displayText: 'Some error occured',
-    //             // source: 'weather'
-    //         })
-    //     }
+        // if (req.body.result.action === 'question9') {
+        //     console.log('Quest3 :', req.body.result.resolvedQuery)
+        //     let resolvedQuery = req.body.result.resolvedQuery;
+        //     let sc = 100 * similarity(answer[7], resolvedQuery);
+        //     console.log("3:", sc)
+        //     score.push(parseInt(sc));
+        //     console.log(score);
+        //     msg = ' Your next question is :' + quest[8]
+        //     console.log(msg)
+        //     return res.json({
+        //         speech: msg,
+        //         displayText: msg,
+        //         // source: ''
+        //     });
+        // } else {
+        //     return res.json({
+        //         speech: 'Some error occured',
+        //         displayText: 'Some error occured',
+        //         // source: 'weather'
+        //     })
+        // }
     // }
     // //quest9
     // if (req.body.result.action === 'question10') {
@@ -563,4 +566,4 @@ router.post('/interview-webhook', (req, res) => {
 })
 
 //exporting router
-module.exports = router
+module.exports = router;
