@@ -369,8 +369,6 @@ router.post('/interview-webhook', (req, res) => {
                 // score.slice(0, score.length);
                 score = [];
                 count=0;
-                
-
             }
             else {
                 msg = ' Your next question is :' + quest[4]
