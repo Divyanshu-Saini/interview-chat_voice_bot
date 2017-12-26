@@ -2,7 +2,6 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const bodyParser = require('body-parser');
-const apiai = require('apiai');
 const webhook = require('./route/rndQaWebhook');
 const interviewDBRoutes =require('./route/interviewDBRoutes')
 const mongoose = require('mongoose');
@@ -10,7 +9,6 @@ const mongoose = require('mongoose');
 //initializing app
 dotenv.load();
 const app = express();
-const spiaiApp = apiai(process.env.APIAI_ACCESS);
 
 //Configuring port and other settings
 app.set('PORT', (process.env.PORT));
