@@ -24,7 +24,7 @@ request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
             quest.push(qa.question);
             answer.push(qa.ans);
         }
-
+        console.log("nodemon watching");
         console.log("Question :", quest);
         console.log("Answer :", answer);
     } else {
@@ -89,14 +89,14 @@ router.post('/rndQa-webhook', (req, res) => {
     // default fallback event
     if (req.body.result.action === 'input.unknown') {
         if (req.body.result.action === 'input.unknown') {
-            count++;
+
             console.log("Count in fallback event :", count)
             let rnd = Math.floor(Math.random() * 6);
             console.log(rnd);
             console.log('User response in fallback :', req.body.result.resolvedQuery)
             score.push(0);
             console.log('Scores in fallback :', score);
-            if (count == 5) {
+            if (count == 10) {
                 let total = 0;
                 for (let i of score) {
                     total += i;
@@ -130,6 +130,7 @@ router.post('/rndQa-webhook', (req, res) => {
                 msg = ' Your next question is :' + quest[rnd]
                 console.log(msg)
             }
+            count++;
             return res.json({
                 speech: msg,
                 displayText: msg,
@@ -169,7 +170,7 @@ router.post('/rndQa-webhook', (req, res) => {
             //     msg =' Tell me '+ quest[count];
             //     count++;
             // }else
-            if(count==5){
+            if(count==10){
                 let total = 0;
                 for (let i of score) {
                     total += i;

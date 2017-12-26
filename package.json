@@ -4,7 +4,8 @@
   "description": "A chatbot which takes interview of candidate  ",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "start_dev":"nodemon main.js"
   },
   "repository": {
     "type": "git",
