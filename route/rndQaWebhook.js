@@ -104,7 +104,7 @@ router.post('/rndQa-webhook', (req, res) => {
                 let avg = total / score.length;
                 u_score = parseInt(avg);
                 console.log('Average Score is ', parseInt(u_score));
-                if (avg > 65) {
+                if (avg > 45) {
                     msg = 'congratulations ' + name + ' you have sucessfully cleared our interview';
                     interview_cleared = true;
                 } else {
