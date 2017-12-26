@@ -76,7 +76,6 @@ router.post('/rndQa-webhook', (req, res) => {
             }
         })
     }
-
     //restart event no
     if (req.body.result.action === 'restart.restart-no') {
         res.json({
@@ -85,6 +84,7 @@ router.post('/rndQa-webhook', (req, res) => {
             }
         })
     }
+
     //exit event yes
     if (req.body.result.action === 'exitevent.exitevent-yes') {
         count = 0;
@@ -95,7 +95,6 @@ router.post('/rndQa-webhook', (req, res) => {
 
         })
     }
-
     //exit event no
     if (req.body.result.action === 'exitevent.exitevent-no') {
         res.json({
@@ -182,7 +181,7 @@ router.post('/rndQa-webhook', (req, res) => {
         }
     }
 
-    //RNDQA event
+    //RNDQA Question
     if (req.body.result.action === 'rndQa') {
         if (req.body.result.action === 'rndQa') {
             console.log('User response From RNDQA :', req.body.result.resolvedQuery);
