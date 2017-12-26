@@ -54,7 +54,7 @@ router.post('/rndQa-webhook', (req, res) => {
             emailid = req.body.result.parameters['email'];
             uid = uuid.v1();
             console.log('User Introduction :', req.body.result.resolvedQuery)
-            msg = 'Nice to meet you' + name + 'ready for the interview?';
+            msg = 'Nice to meet you ' + name + ' ready for the interview?';
             return res.json({
                 speech: msg,
                 displayText: msg,
@@ -67,8 +67,9 @@ router.post('/rndQa-webhook', (req, res) => {
         }
     }
 
-    //restart event
-    if (req.body.result.action === 'restart') {
+    //restart event yes
+    if (req.body.result.action === 'restart.restart-yes') {
+        count = 0;
         res.json({
             "followupEvent": {
                 "name": "WELCOMEEVENT"
@@ -76,11 +77,30 @@ router.post('/rndQa-webhook', (req, res) => {
         })
     }
 
-    //exit event
-    if (req.body.result.action === 'exit') {
+    //restart event no
+    if (req.body.result.action === 'restart.restart-no') {
+        res.json({
+            "followupEvent": {
+                "name": "QA"
+            }
+        })
+    }
+    //exit event yes
+    if (req.body.result.action === 'exitevent.exitevent-yes') {
+        count = 0;
         res.json({
             "followupEvent": {
                 "name": "EXITEVENT"
+            }
+
+        })
+    }
+
+    //exit event no
+    if (req.body.result.action === 'exitevent.exitevent-no') {
+        res.json({
+            "followupEvent": {
+                "name": "INTROEVENT"
             }
 
         })
@@ -170,7 +190,7 @@ router.post('/rndQa-webhook', (req, res) => {
             //     msg =' Tell me '+ quest[count];
             //     count++;
             // }else
-            if(count==10){
+            if (count == 10) {
                 let total = 0;
                 for (let i of score) {
                     total += i;
@@ -199,12 +219,12 @@ router.post('/rndQa-webhook', (req, res) => {
                 score = [];
                 count = 0;
                 console.log(msg)
-            }else{
+            } else {
                 let resolvedQuery = req.body.result.resolvedQuery;
                 let quesCount = count;
                 let ansCount = count;
-                console.log('Answer is :',answer[ansCount--])
-                console.log('user Answer is :',resolvedQuery)
+                console.log('Answer is :', answer[ansCount--])
+                console.log('user Answer is :', resolvedQuery)
                 let sc = 100 * similarity(answer[ansCount--], resolvedQuery);
                 console.log("3:", sc)
                 score.push(parseInt(sc));
