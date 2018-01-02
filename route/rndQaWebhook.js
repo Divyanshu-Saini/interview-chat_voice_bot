@@ -12,7 +12,8 @@ dotenv.load();
 const router = express.Router();
 const client = requestJson.createClient(process.env.REQ_URL_Question);
 var json;
-
+const randomQues=[];
+const randomAns=[];
 const quest = [],
     answer = [];
 //load question and answer
@@ -166,7 +167,10 @@ router.post('/rndQa-webhook', (req, res) => {
     if (req.body.result.action === 'question1') {
         if (req.body.result.action === 'question1') {
             console.log('welcome intent yes :', req.body.result.resolvedQuery)
-            count++
+            count++;
+            let msg=quest[0];
+            quest.slice(0,1);
+            console.log("Sliced value in question 1 is =",quest)
             return res.json({
                 speech: quest[0],
                 displayText: quest[0],
