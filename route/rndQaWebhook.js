@@ -14,7 +14,7 @@ const client = requestJson.createClient(process.env.REQ_URL_Question);
 var json;
 const randomQues=[];
 const randomAns=[];
-const quest = [],
+var quest = [],
     answer = [];
 //load question and answer
 request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
@@ -71,6 +71,23 @@ router.post('/rndQa-webhook', (req, res) => {
     //restart event yes
     if (req.body.result.action === 'restart.restart-yes') {
         count = 0;
+        quest=[];
+        answer=[];
+        request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
+            if (!err && response.statusCode == 200) {
+                json = JSON.parse(body);
+                console.log(json);
+                for (let qa of json) {
+                    quest.push(qa.question);
+                    answer.push(qa.ans);
+                }
+                console.log("nodemon watching");
+                console.log("Question :", quest);
+                console.log("Answer :", answer);
+            } else {
+                console.log('Error occured :', err);
+            }
+        });
         res.json({
             "followupEvent": {
                 "name": "WELCOMEEVENT"
@@ -109,9 +126,8 @@ router.post('/rndQa-webhook', (req, res) => {
     // default fallback event
     if (req.body.result.action === 'input.unknown') {
         if (req.body.result.action === 'input.unknown') {
-
             console.log("Count in fallback event :", count)
-            let rnd = Math.floor(Math.random() * 11);
+            let rnd = Math.floor(Math.random() * quest.length);
             console.log(rnd);
             console.log('User response in fallback :', req.body.result.resolvedQuery)
             score.push(0);
@@ -148,6 +164,11 @@ router.post('/rndQa-webhook', (req, res) => {
             }
             else {
                 msg = ' Your next question is :' + quest[rnd]
+                console.log("Answer fallback ",answer)
+                quest.splice(rnd,1);
+                answer.splice(rnd,1)
+                console.log("From falback event :",quest)
+                console.log("Answer after fallback ",answer)
                 console.log(msg)
             }
             count++;
@@ -169,11 +190,11 @@ router.post('/rndQa-webhook', (req, res) => {
             console.log('welcome intent yes :', req.body.result.resolvedQuery)
             count++;
             let msg=quest[0];
-            quest.slice(0,1);
+            quest.splice(0,1);
             console.log("Sliced value in question 1 is =",quest)
             return res.json({
-                speech: quest[0],
-                displayText: quest[0],
+                speech: msg,
+                displayText: msg,
                 // source: ''
             });
         } else {
@@ -224,9 +245,9 @@ router.post('/rndQa-webhook', (req, res) => {
                 console.log(msg)
             } else {
                 let resolvedQuery = req.body.result.resolvedQuery;
-                let quesCount = count;
-                let ansCount = count;
-                console.log('Answer is :', answer[ansCount--])
+                let quesCount = 0;
+                let ansCount = 0;
+                console.log('Answer is :', answer[ansCount])
                 console.log('user Answer is :', resolvedQuery)
                 let sc = 100 * similarity(answer[ansCount--], resolvedQuery);
                 console.log("3:", sc)
@@ -234,6 +255,11 @@ router.post('/rndQa-webhook', (req, res) => {
                 console.log(score);
                 msg = ' Your next question is :' + quest[quesCount]
                 console.log(msg)
+                console.log("Answer before rndquest ",answer)
+                quest.splice(0,1);
+                answer.splice(0,1)
+                console.log("Question rndquest ",quest)
+                console.log("Answer after rndquest ",answer)
                 count++;
             }
             return res.json({
