@@ -124,10 +124,10 @@ router.post('/rndQa-webhook', (req, res) => {
                 u_score = parseInt(avg);
                 console.log('Average Score is ', parseInt(u_score));
                 if (avg > 45) {
-                    msg = 'Congratulations!!!' + name + '.Your score is ' +u_score+'.You have sucessfully cleared the interview';
+                    msg = 'Congratulations!!!' + name + '. Your score is ' +u_score+'. You have sucessfully cleared the interview';
                     interview_cleared = true;
                 } else {
-                    msg = 'Sorry' + name + 'Your score is' + u_score+'.You havent cleared the interview try later ';
+                    msg = 'Sorry' + name + 'Your score is ' + u_score+'. You havent cleared the interview try later ';
                     interview_cleared = false;
                 }
                 user = {
@@ -198,10 +198,10 @@ router.post('/rndQa-webhook', (req, res) => {
                 u_score = parseInt(avg);
                 console.log('Average Score is ', parseInt(u_score));
                 if (avg > 45) {
-                    msg = 'congratulations ' + name + ' you have sucessfully cleared our interview';
+                    msg = 'Congratulations!!!' + name + '. Your score is ' +u_score+'. You have sucessfully cleared the interview';
                     interview_cleared = true;
                 } else {
-                    msg = 'You havent cleared the interview try later ';
+                    msg = 'Sorry' + name + 'Your score is ' + u_score+'. You havent cleared the interview try later ';
                     interview_cleared = false;
                 }
                 user = {
