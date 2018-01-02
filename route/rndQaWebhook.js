@@ -110,7 +110,7 @@ router.post('/rndQa-webhook', (req, res) => {
         if (req.body.result.action === 'input.unknown') {
 
             console.log("Count in fallback event :", count)
-            let rnd = Math.floor(Math.random() * 6);
+            let rnd = Math.floor(Math.random() * 11);
             console.log(rnd);
             console.log('User response in fallback :', req.body.result.resolvedQuery)
             score.push(0);
@@ -124,10 +124,10 @@ router.post('/rndQa-webhook', (req, res) => {
                 u_score = parseInt(avg);
                 console.log('Average Score is ', parseInt(u_score));
                 if (avg > 45) {
-                    msg = 'congratulations ' + name + ' you have sucessfully cleared our interview';
+                    msg = 'Congratulations!!!' + name + '.Your score is ' +u_score+'.You have sucessfully cleared the interview';
                     interview_cleared = true;
                 } else {
-                    msg = 'You havent cleared the interview try later ';
+                    msg = 'Sorry' + name + 'Your score is' + u_score+'.You havent cleared the interview try later ';
                     interview_cleared = false;
                 }
                 user = {
