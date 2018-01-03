@@ -12,26 +12,30 @@ dotenv.load();
 const router = express.Router();
 const client = requestJson.createClient(process.env.REQ_URL_Question);
 var json;
-const randomQues=[];
-const randomAns=[];
+const randomQues = [];
+const randomAns = [];
 var quest = [],
     answer = [];
-//load question and answer
-request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
-    if (!err && response.statusCode == 200) {
-        json = JSON.parse(body);
-        console.log(json);
-        for (let qa of json) {
-            quest.push(qa.question);
-            answer.push(qa.ans);
+
+function loadQuestion() {
+    //load question and answer
+    request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
+        if (!err && response.statusCode == 200) {
+            json = JSON.parse(body);
+            console.log(json);
+            for (let qa of json) {
+                quest.push(qa.question);
+                answer.push(qa.ans);
+            }
+            console.log("nodemon watching");
+            console.log("Question :", quest);
+            console.log("Answer :", answer);
+        } else {
+            console.log('Error occured :', err);
         }
-        console.log("nodemon watching");
-        console.log("Question :", quest);
-        console.log("Answer :", answer);
-    } else {
-        console.log('Error occured :', err);
-    }
-});
+    });
+}
+
 
 //scores
 var score = [];
@@ -56,6 +60,10 @@ router.post('/rndQa-webhook', (req, res) => {
             uid = uuid.v1();
             console.log('User Introduction :', req.body.result.resolvedQuery)
             msg = 'Nice to meet you ' + name + ' ready for the interview?';
+            count = 0;
+            quest = [];
+            answer = [];
+            loadQuestion();
             return res.json({
                 speech: msg,
                 displayText: msg,
@@ -71,23 +79,9 @@ router.post('/rndQa-webhook', (req, res) => {
     //restart event yes
     if (req.body.result.action === 'restart.restart-yes') {
         count = 0;
-        quest=[];
-        answer=[];
-        request.get(process.env.REQ_URL_INTERQA, (err, response, body) => {
-            if (!err && response.statusCode == 200) {
-                json = JSON.parse(body);
-                console.log(json);
-                for (let qa of json) {
-                    quest.push(qa.question);
-                    answer.push(qa.ans);
-                }
-                console.log("nodemon watching");
-                console.log("Question :", quest);
-                console.log("Answer :", answer);
-            } else {
-                console.log('Error occured :', err);
-            }
-        });
+        quest = [];
+        answer = [];
+        loadQuestion();
         res.json({
             "followupEvent": {
                 "name": "WELCOMEEVENT"
@@ -141,10 +135,10 @@ router.post('/rndQa-webhook', (req, res) => {
                 u_score = parseInt(avg);
                 console.log('Average Score is ', parseInt(u_score));
                 if (avg > 45) {
-                    msg = 'Congratulations!!!' + name + '. Your score is ' +u_score+'. You have sucessfully cleared the interview';
+                    msg = 'Congratulations!!! ' + name + '. Your score is ' + u_score + '. You have sucessfully cleared the interview';
                     interview_cleared = true;
                 } else {
-                    msg = 'Sorry' + name + 'Your score is ' + u_score+'. You havent cleared the interview try later ';
+                    msg = 'Sorry ' + name + ' Your score is ' + u_score + '. You havent cleared the interview try later ';
                     interview_cleared = false;
                 }
                 user = {
@@ -160,15 +154,18 @@ router.post('/rndQa-webhook', (req, res) => {
                 });
                 score = [];
                 count = 0;
+                quest = [];
+                answer = [];
+                loadQuestion();
                 console.log(msg)
             }
             else {
                 msg = ' Your next question is :' + quest[rnd]
-                console.log("Answer fallback ",answer)
-                quest.splice(rnd,1);
-                answer.splice(rnd,1)
-                console.log("From falback event :",quest)
-                console.log("Answer after fallback ",answer)
+                console.log("Answer fallback ", answer)
+                quest.splice(rnd, 1);
+                answer.splice(rnd, 1)
+                console.log("From falback event :", quest)
+                console.log("Answer after fallback ", answer)
                 console.log(msg)
             }
             count++;
@@ -189,9 +186,9 @@ router.post('/rndQa-webhook', (req, res) => {
         if (req.body.result.action === 'question1') {
             console.log('welcome intent yes :', req.body.result.resolvedQuery)
             count++;
-            let msg=quest[0];
-            quest.splice(0,1);
-            console.log("Sliced value in question 1 is =",quest)
+            let msg = quest[0];
+            quest.splice(0, 1);
+            console.log("Sliced value in question 1 is =", quest)
             return res.json({
                 speech: msg,
                 displayText: msg,
@@ -223,10 +220,10 @@ router.post('/rndQa-webhook', (req, res) => {
                 u_score = parseInt(avg);
                 console.log('Average Score is ', parseInt(u_score));
                 if (avg > 45) {
-                    msg = 'Congratulations!!!' + name + '. Your score is ' +u_score+'. You have sucessfully cleared the interview';
+                    msg = 'Congratulations!!! ' + name + '. Your score is ' + u_score + '. You have sucessfully cleared the interview';
                     interview_cleared = true;
                 } else {
-                    msg = 'Sorry' + name + 'Your score is ' + u_score+'. You havent cleared the interview try later ';
+                    msg = 'Sorry ' + name + ' Your score is ' + u_score + '. You havent cleared the interview try later ';
                     interview_cleared = false;
                 }
                 user = {
@@ -242,6 +239,9 @@ router.post('/rndQa-webhook', (req, res) => {
                 });
                 score = [];
                 count = 0;
+                quest = [];
+                answer = [];
+                loadQuestion();
                 console.log(msg)
             } else {
                 let resolvedQuery = req.body.result.resolvedQuery;
@@ -255,11 +255,11 @@ router.post('/rndQa-webhook', (req, res) => {
                 console.log(score);
                 msg = ' Your next question is :' + quest[quesCount]
                 console.log(msg)
-                console.log("Answer before rndquest ",answer)
-                quest.splice(0,1);
-                answer.splice(0,1)
-                console.log("Question rndquest ",quest)
-                console.log("Answer after rndquest ",answer)
+                console.log("Answer before rndquest ", answer)
+                quest.splice(0, 1);
+                answer.splice(0, 1)
+                console.log("Question rndquest ", quest)
+                console.log("Answer after rndquest ", answer)
                 count++;
             }
             return res.json({
