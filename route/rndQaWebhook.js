@@ -51,10 +51,35 @@ var user = undefined;
 var count = 0;
 
 router.post('/rndQa-webhook', (req, res) => {
-    //user intro
+    //user intro custom
     if (req.body.result.action === 'custom.name.qa.e') {
         if (req.body.result.action === 'custom.name.qa.e') {
             name = req.body.result.parameters['name'];
+            qualification = req.body.result.parameters['qualifiation'];
+            emailid = req.body.result.parameters['email'];
+            uid = uuid.v1();
+            console.log('User Introduction :', req.body.result.resolvedQuery)
+            msg = 'Nice to meet you ' + name + ' ready for the interview?';
+            count = 0;
+            quest = [];
+            answer = [];
+            loadQuestion();
+            return res.json({
+                speech: msg,
+                displayText: msg,
+            });
+        } else {
+            return res.json({
+                speech: 'Some error occured',
+                displayText: 'Some error occured',
+            });
+        }
+    }
+
+    //user intro system
+    if (req.body.result.action === 'sys.name.qa.e') {
+        if (req.body.result.action === 'sys.name.qa.e') {
+            name = req.body.result.parameters['given-name'];
             qualification = req.body.result.parameters['qualifiation'];
             emailid = req.body.result.parameters['email'];
             uid = uuid.v1();
