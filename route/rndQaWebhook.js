@@ -52,8 +52,8 @@ var count = 0;
 
 router.post('/rndQa-webhook', (req, res) => {
     //user intro
-    if (req.body.result.action === 'intro-intend.intro-intend-qualification.intro-intend-Qualification-custom') {
-        if (req.body.result.action === 'intro-intend.intro-intend-qualification.intro-intend-Qualification-custom') {
+    if (req.body.result.action === 'custom.name.qa.e') {
+        if (req.body.result.action === 'custom.name.qa.e') {
             name = req.body.result.parameters['name'];
             qualification = req.body.result.parameters['qualifiation'];
             emailid = req.body.result.parameters['email'];
