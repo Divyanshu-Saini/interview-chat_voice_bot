@@ -49,6 +49,7 @@ var u_score = undefined;
 var interview_cleared = undefined;
 var user = undefined;
 var count = 0;
+var c_ansCount = 0;
 
 router.post('/rndQa-webhook', (req, res) => {
     //user intro custom
@@ -159,11 +160,12 @@ router.post('/rndQa-webhook', (req, res) => {
                 let avg = total / score.length;
                 u_score = parseInt(avg);
                 console.log('Average Score is ', parseInt(u_score));
-                if (avg > 45) {
-                    msg = 'Congratulations!!! ' + name + '. Your score is ' + u_score + '. You have sucessfully cleared the interview';
+                console.log("Correct answer in calculating result :",c_ansCount);
+                if (c_ansCount >= 5) {
+                    msg = 'Congratulations!!! ' + name + '. Your score is ' +c_ansCount + 'out of 10. You have sucessfully cleared the interview';
                     interview_cleared = true;
                 } else {
-                    msg = 'Sorry ' + name + ' Your score is ' + u_score + '. You havent cleared the interview try later ';
+                    msg = 'Sorry ' + name + ' Your score is ' + c_ansCount + 'out of 10. You havent cleared the interview try later ';
                     interview_cleared = false;
                 }
                 user = {
@@ -171,7 +173,7 @@ router.post('/rndQa-webhook', (req, res) => {
                     name: name,
                     qualification: qualification,
                     email: emailid,
-                    score: u_score,
+                    score: c_ansCount,
                     interview_cleared: interview_cleared,
                 }
                 client.post('getUser/', user, function (err, res, body) {
@@ -244,11 +246,12 @@ router.post('/rndQa-webhook', (req, res) => {
                 let avg = total / score.length;
                 u_score = parseInt(avg);
                 console.log('Average Score is ', parseInt(u_score));
-                if (avg > 45) {
-                    msg = 'Congratulations!!! ' + name + '. Your score is ' + u_score + '. You have sucessfully cleared the interview';
+                console.log("Correct answer in calculating result :",c_ansCount);
+                if (c_ansCount >= 5) {
+                    msg = 'Congratulations!!! ' + name + '. Your score is ' +c_ansCount + 'out of 10. You have sucessfully cleared the interview';
                     interview_cleared = true;
                 } else {
-                    msg = 'Sorry ' + name + ' Your score is ' + u_score + '. You havent cleared the interview try later ';
+                    msg = 'Sorry ' + name + ' Your score is ' + c_ansCount + 'out of 10. You havent cleared the interview try later ';
                     interview_cleared = false;
                 }
                 user = {
@@ -256,7 +259,7 @@ router.post('/rndQa-webhook', (req, res) => {
                     name: name,
                     qualification: qualification,
                     email: emailid,
-                    score: u_score,
+                    score: c_ansCount,
                     interview_cleared: interview_cleared,
                 }
                 client.post('getUser/', user, function (err, res, body) {
@@ -274,9 +277,13 @@ router.post('/rndQa-webhook', (req, res) => {
                 let ansCount = 0;
                 console.log('Answer is :', answer[ansCount])
                 console.log('user Answer is :', resolvedQuery)
-                let sc = 100 * similarity(answer[ansCount--], resolvedQuery);
+                let sc = 10 * similarity(answer[ansCount--], resolvedQuery);
                 console.log("3:", sc)
+                if(sc>=2){
+                    c_ansCount++;
+                }
                 score.push(parseInt(sc));
+                console.log("Correct answer:",c_ansCount);
                 console.log(score);
                 msg = ' Your next question is :' + quest[quesCount]
                 console.log(msg)
